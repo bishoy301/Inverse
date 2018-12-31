@@ -48,3 +48,43 @@ Window::Window(int width, int height, const std::string& title) :
 	}
 }
 
+Window::~Window()
+{
+	SDL_GL_DeleteContext(m_glContext);
+	SDL_DestroyWindow(m_window);
+	SDL_Quit();
+}
+
+void Window::update()
+{
+	//TODO(Bishoy): Handle Input in here and update window
+}
+
+void Window::swap_buffers()
+{
+	SDL_GL_SwapWindow(m_window);
+}
+
+void Window::bind_as_render_target() const
+{
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+# if PROFILING_SET_1x1_VIEWPORT == 0
+	glViewport(0, 0, GetWidth(), GetHeight());
+# else
+	glViewport(0, 0, 1, 1);
+# endif
+}
+
+void Window::set_fullscreen(bool value)
+{
+	int mode = 0;
+	if (value) {
+		mode = SDL_WINDOW_FULLSCREEN;
+	} else {
+		mode = 0;
+	}
+
+	SDL_SetWindowFullscreen(m_window, mode);
+}
