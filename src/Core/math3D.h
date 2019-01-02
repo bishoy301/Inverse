@@ -143,3 +143,5 @@ class Vec {
 	private:
 		T values[D];
 };
+
+#endif
