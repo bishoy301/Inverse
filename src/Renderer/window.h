@@ -29,8 +29,8 @@ class Window {
 			return m_title;
 		}
 		// Calculation for center of screen
-		inline Vector2f get_center() const {
-			return Vector2f((float)m_width/2.0f, (float)m_height/2.0f);
+		inline Vec2f get_center() const {
+			return Vec2f((float)m_width/2.0f, (float)m_height/2.0f);
 		}
 		inline SDL_Window *get_sdl_window() {
 			return m_window;
