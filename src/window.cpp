@@ -58,6 +58,28 @@ Window::~Window()
 void Window::update()
 {
 	//TODO(Bishoy): Handle Input in here and update window
+	SDL_Event event;
+	while(SDL_PollEvent(&e)) {
+		if (event.type == SDL_QUIT) {
+			m_is_close_requested = true;
+		}
+
+		if (event.type == SDL_MOUSEMOTION) {
+			//TODO handle mouse input
+		}
+
+		if (event.type == SDL_KEYDOWN) {
+			//TODO handle key input
+		}
+
+		if (event.type == SDL_KEYUP) {
+			//TODO handle key up input
+		}
+
+		if (event.type == SDL_MOUSEBUTTONUP) {
+			//TODO handle mouse click input
+		}
+	}
 }
 
 void Window::swap_buffers()
