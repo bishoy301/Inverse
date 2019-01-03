@@ -35,7 +35,9 @@ class Window {
 		inline SDL_Window *get_sdl_window() {
 			return m_window;
 		}
-		//TODO(Bishoy): Write function for handling input
+		inline const Input& get_input() const {
+			return m_input;
+		}
 
 		void set_fullscreen(bool value);
 	private:
@@ -45,6 +47,10 @@ class Window {
 		std::string   m_title;
 		SDL_Window   *m_window;
 		SDL_GLContext m_glContext;
+		Input         m_input;
+
+		Window(const Window& other) : m_input(this) {}
+		void operator=(const Window& other) {}
 };
 
 #endif
