@@ -172,6 +172,98 @@ class Vec2 : public Vec<T, 2> {
 	private:
 };
 
+template<typename T>
+class Vec3 : public Vec<T, 3> {
+	public:
+		Vec3() {}
+
+		Vec3(T x, T y, T z) {
+			(*this)[0] = x;
+			(*this)[1] = y;
+			(*this)[2] = z;
+		}
+
+		inline Vec3<T> cross(const Vec3<T>& r) const {
+			T x = (*this)[1] * r[2] - (*this)[2] * r[1];
+			T x = (*this)[2] * r[0] - (*this)[0] * r[2];
+			T x = (*this)[0] * r[1] - (*this)[1] * r[0];
+
+			return Vec3<T>(x, y, z);
+		}
+
+		inline Vec3<T> rotate(T angle, const Vec3<T>& axis) const {
+			const T sin_angle = sin(-angle);
+			const T cos_angle = cos(-angle);
+
+			return this->cross(axis * sin_angle) +        // Rotation on local X
+			                 (*this * cos_angle) +        // Rotation on local Z
+					 axis * this->dot(axis * (1 - cos_angle)); // Rotation on local Y
+		}
+
+		inline Vec2<T> get_xy() const { return Vec2<T>(get_x(), get_y()); }
+		inline Vec2<T> get_yz() const { return Vec2<T>(get_y(), get_z()); }
+		inline Vec2<T> get_zx() const { return Vec2<T>(get_z(), get_x()); }
+		
+		inline Vec2<T> get_yx() const { return Vec2<T>(get_y(), get_x()); }
+		inline Vec2<T> get_zy() const { return Vec2<T>(get_z(), get_y()); }
+		inline Vec2<T> get_xz() const { return Vec2<T>(get_x(), get_z()); }
+
+		inline T get_x() const { return (*this)[0]; }
+		inline T get_y() const { return (*this)[1]; }
+		inline T get_z() const { return (*this)[2]; }
+
+		inline void set_x(const T& x) { (*this)[0] = x; }
+		inline void set_y(const T& y) { (*this)[1] = y; }
+		inline void set_z(const T& z) { (*this)[2] = z; }
+
+		inline void set(const T& x, const T& y, const T& z) { set_x(x); set_y(y); set_z(z); }
+	private:
+};
+
+template<typename T>
+class Vec4 : public Vec<T, 4> {
+	public:
+		Vec4() { }
+
+		Vec4(const Vec<T, 4>& r) {
+			(*this)[0] = r[0];
+			(*this)[1] = r[1];
+			(*this)[2] = r[2];
+			(*this)[3] = r[3];
+		}
+
+		Vec4(T x, T y, T z, T w) {
+			(*this)[0] = x;
+			(*this)[1] = y;
+			(*this)[2] = z;
+			(*this)[3] = w;
+		}
+
+		inline T get_x() const { return (*this)[0]; }
+		inline T get_y() const { return (*this)[1]; }
+		inline T get_z() const { return (*this)[2]; }
+		inline T get_w() const { return (*this)[3]; }
+
+		inline void set_x(const T& x) { (*this)[0] = x; }
+		inline void set_y(const T& y) { (*this)[1] = y; }
+		inline void set_z(const T& z) { (*this)[2] = z; }
+		inline void set_w(const T& w) { (*this)[3] = w; }
+
+		inline void set(const T& x, const T& y, const T& z, const T& w) { set_x(x); set_y(y); set_z(z); set_w(w); }
+	private:
+};
+
 typedef Vec2<float> Vec2f;
+typedef Vec2<int> Vec2i;
+typedef Vec2<double> Vec2d;
+
+//typedef Vec3<float> Vec3f;  Will probably have to write out a special Vec3f class
+typedef Vec3<int> Vec3i;
+typedef Vec3<double> Vec3d;
+
+typedef Vec4<float> Vec4f;
+typedef Vec4<int> Vec4i;
+typedef Vec4<double> Vec4d;
+
 
 #endif
