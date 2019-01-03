@@ -14,6 +14,8 @@ Window::Window(int width, int height, const std::string& title) :
 		std::cout << "SDL couldn't be initialized" << std::endl;
 	}
 
+	
+
 	// Set up of required GL Attributes
 	SDL_GL_SETATTRIBUTE(SDL_GL_RED_SIZE, 8); 
 	SDL_GL_SETATTRIBUTE(SDL_GL_GREEN_SIZE, 8); 
@@ -59,7 +61,7 @@ void Window::update()
 {
 	//TODO(Bishoy): Handle Input in here and update window
 	SDL_Event event;
-	while(SDL_PollEvent(&e)) {
+	while(SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT) {
 			m_is_close_requested = true;
 		}
@@ -67,6 +69,7 @@ void Window::update()
 		if (event.type == SDL_MOUSEMOTION) {
 			//TODO handle mouse input
 		}
+		
 
 		if (event.type == SDL_KEYDOWN) {
 			//TODO handle key input
