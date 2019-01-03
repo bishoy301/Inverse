@@ -53,7 +53,7 @@ class Input {
         }
 
         //Checks if passed scan code is within bounds.
-        inline bool get_key_up(int scan_code)
+        inline bool get_key_up(int scan_code) const
         {
             if(scan_code > SDL_SCANCODE_UNKNOWN && scan_code < SDL_NUM_SCANCODES)
                 return KEY_RELEASED;
