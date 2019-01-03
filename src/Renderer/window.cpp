@@ -14,6 +14,8 @@ Window::Window(int width, int height, const std::string& title) :
 		std::cout << "SDL couldn't be initialized" << std::endl;
 	}
 
+	
+
 	// Set up of required GL Attributes
 	SDL_GL_SETATTRIBUTE(SDL_GL_RED_SIZE, 8); 
 	SDL_GL_SETATTRIBUTE(SDL_GL_GREEN_SIZE, 8); 
@@ -77,6 +79,7 @@ void Window::update()
 			m_input.set_mouseX(event.motion.x);
 			m_input.set_mouseY(event.motion.y);
 		}
+		
 
 		if (event.type == SDL_KEYDOWN) {
 			int value = event.key.keysym.scancode;
