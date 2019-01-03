@@ -144,4 +144,34 @@ class Vec {
 		T values[D];
 };
 
+template<typename T>
+class Vec2 : public Vec<T, 2> {
+	public:
+		Vec2() {}
+
+		Vec2(const Vec<T, D>& r) {
+			(*this)[0] = r[0];
+			(*this)[1] = r[1];
+		}
+
+		Vec2(T x, T y) {
+			(*this)[0] = x;
+			(*this)[1] = y;
+		}
+
+		T cross(const Vec2<T>& r) const {
+			return get_x() * r.get_y() - get_y() * r.get_x();
+		}
+
+		inline T get_x() const { return (*this)[0]; };
+		inline T get_y() const { return (*this)[1]; };
+
+		inline void set_x(const T& x) { (*this)[0] = x; }
+		inline void set_y(const T& y) { (*this)[1] = y; }
+
+	private:
+};
+
+typedef Vec2<float> Vec2f;
+
 #endif
