@@ -1,6 +1,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include "../Core/input.h"
 #include <SDL2/SDL.h>
 #include <string>
 
