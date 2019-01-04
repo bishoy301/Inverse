@@ -57,27 +57,53 @@ Window::~Window()
 
 void Window::update()
 {
-	//TODO(Bishoy): Handle Input in here and update window
+	for (int i = 0; i < Input::NUM_MOUSE_BUTTONS; i++) {
+		m_input.set_mouse_down(i, false);
+		m_input.set_mouse_up(i, false);
+	}
+
+	for (int i = 0; i < Input::NUM_KEYS; i++) {
+		m_input.set_key_down(i, false);
+		m_input.set_key_up(i, false);
+	}
+
 	SDL_Event event;
-	while(SDL_PollEvent(&e)) {
+	while(SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT) {
 			m_is_close_requested = true;
 		}
 
 		if (event.type == SDL_MOUSEMOTION) {
-			//TODO handle mouse input
+			m_input.set_mouseX(event.motion.x);
+			m_input.set_mouseY(event.motion.y);
 		}
 
 		if (event.type == SDL_KEYDOWN) {
-			//TODO handle key input
+			int value = event.key.keysym.scancode;
+
+			m_input.set_key(value, true);
+			m_input.set_key_down(value, true);
 		}
 
 		if (event.type == SDL_KEYUP) {
-			//TODO handle key up input
+			int value = event.key.keysym.scancode;
+
+			m_input.set_key(value, false);
+			m_input.set_key_up(value, true);
+		}
+
+		if (event.type == SDL_MOUSEBUTTONDOWN) {
+			int value = event.button.button;
+
+			m_input.set_mouse(value, true);
+			m_input.set_mouse_down(value, true);
 		}
 
 		if (event.type == SDL_MOUSEBUTTONUP) {
-			//TODO handle mouse click input
+			int value = event.button.button;
+
+			m_input.set_mouse(value, false);
+			m_input.set_mouse_up(value, true);
 		}
 	}
 }
