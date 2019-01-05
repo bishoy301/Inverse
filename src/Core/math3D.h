@@ -149,7 +149,7 @@ class Vec2 : public Vec<T, 2> {
 	public:
 		Vec2() {}
 
-		Vec2(const Vec<T, D>& r) {
+		Vec2(const Vec<T, 2>& r) {
 			(*this)[0] = r[0];
 			(*this)[1] = r[1];
 		}
