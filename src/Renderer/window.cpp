@@ -10,7 +10,7 @@ Window::Window(int width, int height, const std::string& title) :
 	m_title(title),
 	m_is_close_requested(false)
 {
-	if(SDL_Init(SDL_VIDEO | SDL_INIT_TIMER) != 0) {
+	if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		std::cout << "SDL couldn't be initialized" << std::endl;
 	}
 
