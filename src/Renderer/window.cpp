@@ -122,7 +122,7 @@ void Window::bind_as_render_target() const
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 # if PROFILING_SET_1x1_VIEWPORT == 0
-	glViewport(0, 0, GetWidth(), GetHeight());
+	glViewport(0, 0, get_width(), get_height());
 # else
 	glViewport(0, 0, 1, 1);
 # endif
