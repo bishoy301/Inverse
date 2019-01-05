@@ -185,8 +185,8 @@ class Vec3 : public Vec<T, 3> {
 
 		inline Vec3<T> cross(const Vec3<T>& r) const {
 			T x = (*this)[1] * r[2] - (*this)[2] * r[1];
-			T x = (*this)[2] * r[0] - (*this)[0] * r[2];
-			T x = (*this)[0] * r[1] - (*this)[1] * r[0];
+			T y = (*this)[2] * r[0] - (*this)[0] * r[2];
+			T z = (*this)[0] * r[1] - (*this)[1] * r[0];
 
 			return Vec3<T>(x, y, z);
 		}
