@@ -5,15 +5,10 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+#include "math3D.h"
 #include <SDL2/SDL.h>
 #include <string>
-#include "window.h"
-#include "math3D.h"
 
-#define NUM_MOUSE_BUTTONS 6
-#define KEY_PRESSED 1
-#define KEY_HELD 1
-#define KEY_RELEASED 1
 
 class Window;
 
@@ -23,21 +18,14 @@ class Input {
 
         Input();
         
-        Input(Window *window)
-        {
-            m_window = window;
-        }
+        Input(Window *window);
 
         //Key Functions
 
         //Checks if passed scan code is within bounds of the enum and return true if it is or false if it's not. 
         inline bool get_key(int scan_code) const
         {
-            if(scan_code > SDL_SCANCODE_UNKNOWN && scan_code < SDL_NUM_SCANCODES) {
-                return KEY_PRESSED;
-                }
-            else
-                return SDL_SCANCODE_UNKNOWN;
+            return m_key_inputs[scan_code];
         }
 
         //Sets the corresponding index within the array to true if the key was pressed.
@@ -49,11 +37,7 @@ class Input {
         //Called for held down key state.
         inline bool get_key_down(int scan_code) const
         {
-            if(scan_code > SDL_SCANCODE_UNKNOWN && scan_code < SDL_NUM_SCANCODES) {
-                return KEY_HELD;
-                }
-            else
-                return SDL_SCANCODE_UNKNOWN;
+            return m_down_keys[scan_code];
         }
 
         //Sets the corresponding index within the array for held down keys to true if the key was pressed.
@@ -65,17 +49,14 @@ class Input {
         //Checks if passed scan code is within bounds.
         inline bool get_key_up(int scan_code) const
         {
-            if(scan_code > SDL_SCANCODE_UNKNOWN && scan_code < SDL_NUM_SCANCODES)
-                return KEY_RELEASED;
-            else
-                return SDL_SCANCODE_UNKNOWN;
+            return m_up_keys[scan_code];
         }
 
         // Sets both arrays for the corresponding scan code to false. 
         inline void set_key_up(int scan_code, bool code_found)
         {
-            m_key_inputs[scan_code] = !KEY_RELEASED;
-            m_down_keys[scan_code] = !KEY_RELEASED;
+            m_key_inputs[scan_code] = code_found;
+            m_down_keys[scan_code] = code_found;
         }
 
         //Mouse Functions
@@ -118,13 +99,12 @@ class Input {
 
         //Boolean arrays for mouse input to track pressed/held/released mouse buttons. 
 
-        bool m_mouse_inputs[NUM_MOUSE_BUTTONS] = {0};
-        bool m_down_mouse[NUM_MOUSE_BUTTONS] = {0};
-        bool m_up_mouse[NUM_MOUSE_BUTTONS] = {0};
+        bool m_mouse_inputs[NUM_MOUSE_BUTTONS];
+        bool m_down_mouse[NUM_MOUSE_BUTTONS];
+        bool m_up_mouse[NUM_MOUSE_BUTTONS];
 
         int m_mouseX = 0;
         int m_mouseY = 0;
-
        
 };
 
