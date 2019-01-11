@@ -6,6 +6,7 @@
 #define INPUT_H
 
 #include <SDL2/SDL.h>
+#include <string>
 #include "window.h"
 #include "math3D.h"
 
@@ -14,9 +15,18 @@
 #define KEY_HELD 1
 #define KEY_RELEASED 1
 
+class Window;
+
 class Input {
     public:
-        Input(Window window);
+        const static int num_mouse_buttons = NUM_MOUSE_BUTTONS;
+
+        Input();
+        
+        Input(Window *window)
+        {
+            m_window = window;
+        }
 
         //Key Functions
 
@@ -98,6 +108,9 @@ class Input {
         inline Vec2f get_mouse_pos() const {return Vec2f((float) m_mouseX, (float) m_mouseY); }
 
     private:
+
+        Window *m_window;
+
         //Boolean arrays for key inputs to track pressed/held/released key inputs.
         bool m_key_inputs[SDL_NUM_SCANCODES] = {0};
         bool m_down_keys[SDL_NUM_SCANCODES] = {0};
