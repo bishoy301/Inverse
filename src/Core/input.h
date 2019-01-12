@@ -5,6 +5,8 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+#define NUM_MOUSE_BUTTONS 256
+
 #include "math3D.h"
 #include <SDL2/SDL.h>
 #include <string>
@@ -88,6 +90,10 @@ class Input {
 
         inline Vec2f get_mouse_pos() const {return Vec2f((float) m_mouseX, (float) m_mouseY); }
 
+        void set_cursor(bool visible) const;
+
+        void set_mouse_position(const Vec2f& pos) const;
+
     private:
 
         Window *m_window;
@@ -103,8 +109,8 @@ class Input {
         bool m_down_mouse[NUM_MOUSE_BUTTONS];
         bool m_up_mouse[NUM_MOUSE_BUTTONS];
 
-        int m_mouseX = 0;
-        int m_mouseY = 0;
+        int m_mouseX;
+        int m_mouseY;
        
 };
 
