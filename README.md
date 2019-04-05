@@ -1,4 +1,4 @@
 Inverse Engine
 ==
 
-authored by Bishoy Boktor
+authored by Bishoy Boktor and John Peden
